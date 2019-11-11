@@ -19,6 +19,7 @@ color = Color( 0, 0, 0, 1 )
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="DeathArea" type="Area2D" parent="."]
+monitoring = false
 
 [node name="SectionClearedArea" type="Area2D" parent="."]
 editor/display_folded = true

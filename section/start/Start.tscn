@@ -11,8 +11,8 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathArea" index="0"]
 position = Vector2( 180, 320 )
-polygon = PoolVector2Array( -25, -311.3, -19, -297.4, -19, 300, -20.5, 300, -25.4, 320, -180, 320, -180, -320, -25, -320 )
+polygon = PoolVector2Array( -27, -311.3, -21, -297.4, -21, 300, -22.5, 300, -27.4, 320, -180, 320, -180, -320, -27, -320 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="DeathArea" index="1"]
 position = Vector2( 180, 320 )
-polygon = PoolVector2Array( 180, 320, 25.5, 320, 19, 298.3, 19, -299, 20.6, -299, 25, -311.4, 25, -320, 180, -320 )
+polygon = PoolVector2Array( 180, 320, 27.5, 320, 21, 298.3, 21, -299, 22.6, -299, 27, -311.4, 27, -320, 180, -320 )

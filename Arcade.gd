@@ -18,6 +18,8 @@ onready var last_section: Section = $StartSection
 
 func _ready():
 	set_physics_process(false)
+	if not last_section.is_connected("cleared", self, "create_new_section"):
+		last_section.connect("cleared", self, "create_new_section", [], CONNECT_DEFERRED)
 	section_pool.append(last_section)
 	create_new_section()
 
@@ -40,13 +42,12 @@ func start_game():
 
 
 func create_new_section():
-	print("Arcade: create_new_section")
 	var new_section = sections[randi() % len(sections)].instance()
 	new_section.position = last_section.position
 	var height_offset = new_section.height - last_section.height
 	new_section.position.y -= last_section.height + height_offset
 	add_child(new_section)
-	new_section.connect("cleared", self, "create_new_section")
+	new_section.connect("cleared", self, "create_new_section", [], CONNECT_DEFERRED)
 	last_section = new_section
 	section_pool.push_front(new_section)
 	if len(section_pool) > section_pool_capacity:
