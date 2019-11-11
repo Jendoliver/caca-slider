@@ -6,7 +6,8 @@ func reparent(node: Node, new_parent: Node, keep_position = false):
 	var prev_pos = node.global_position
 	node.get_parent().remove_child(node)
 	new_parent.add_child(node)
-	node.global_position = prev_pos
+	if keep_position:
+		node.global_position = prev_pos
 
 
 func repr(node: Node, deep = false):
