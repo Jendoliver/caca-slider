@@ -5,7 +5,6 @@
 
 [node name="Arcade" type="Node2D"]
 script = ExtResource( 1 )
-move_speed_pxs = 500
 
 [node name="StartSection" parent="." instance=ExtResource( 2 )]
 [connection signal="cleared" from="StartSection" to="." method="create_new_section" flags=3]

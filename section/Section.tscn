@@ -3,7 +3,7 @@
 [ext_resource path="res://section/Section.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 180, 10 )
+extents = Vector2( 180, 20 )
 
 [node name="Section" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,11 +19,9 @@ color = Color( 0, 0, 0, 1 )
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="DeathArea" type="Area2D" parent="."]
-monitoring = false
 
 [node name="SectionClearedArea" type="Area2D" parent="."]
-editor/display_folded = true
-position = Vector2( 180, 10 )
+position = Vector2( 180, 20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SectionClearedArea"]
 shape = SubResource( 1 )
