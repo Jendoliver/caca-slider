@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://section/Section.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 180, 10 )
 
 [node name="Section" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,13 +18,13 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
-[node name="FreeNotifier" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 180, -20 )
-
-[node name="CreateNotifier" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 180, 620 )
-
 [node name="DeathArea" type="Area2D" parent="."]
-[connection signal="viewport_exited" from="FreeNotifier" to="." method="_on_FreeNotifier_viewport_exited"]
-[connection signal="viewport_entered" from="CreateNotifier" to="." method="_on_CreateNotifier_viewport_entered"]
+
+[node name="SectionClearedArea" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 180, 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SectionClearedArea"]
+shape = SubResource( 1 )
 [connection signal="area_entered" from="DeathArea" to="." method="_on_DeathArea_area_entered"]
+[connection signal="area_entered" from="SectionClearedArea" to="." method="_on_SectionClearedArea_area_entered"]

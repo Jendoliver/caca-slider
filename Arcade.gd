@@ -3,12 +3,14 @@ extends Node2D
 var Player = preload("res://player/Player.tscn")
 
 export (int) var move_speed_pxs = 100
+export (int) var section_pool_capacity = 4
 
 var sections = [
 	preload("res://section/start/Start.tscn"),
 	preload("res://section/sneaky/Sneaky.tscn"),
 	preload("res://section/drifter/Drifter.tscn")
 ]
+var section_pool = []
 var player
 
 onready var last_section: Section = $StartSection
@@ -16,6 +18,8 @@ onready var last_section: Section = $StartSection
 
 func _ready():
 	set_physics_process(false)
+	section_pool.append(last_section)
+	create_new_section()
 
 
 func _physics_process(delta):
@@ -38,9 +42,12 @@ func start_game():
 func create_new_section():
 	print("Arcade: create_new_section")
 	var new_section = sections[randi() % len(sections)].instance()
-	new_section.global_position = last_section.global_position
+	new_section.position = last_section.position
 	var height_offset = new_section.height - last_section.height
-	new_section.global_position.y -= last_section.height + height_offset
+	new_section.position.y -= last_section.height + height_offset
 	add_child(new_section)
-	new_section.connect("appeared_on_screen", self, "create_new_section")
+	new_section.connect("cleared", self, "create_new_section")
 	last_section = new_section
+	section_pool.push_front(new_section)
+	if len(section_pool) > section_pool_capacity:
+		section_pool.pop_back().queue_free()

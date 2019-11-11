@@ -1,12 +1,13 @@
 class_name Section
 extends Node2D
 
-signal appeared_on_screen
+signal cleared
 
 export (int) var height = 640
 
 onready var background: ColorRect = $Background
 onready var sprite: Sprite = $Sprite
+onready var section_cleared_area: Area2D = $SectionClearedArea
 
 
 func _ready():
@@ -15,15 +16,12 @@ func _ready():
 
 func _on_DeathArea_area_entered(area):
 	if area is PlayerArea:
-		print("Arcade: _on_DeathArea_area_entered (PLAYER IN)")
+		print("Section: _on_DeathArea_area_entered (PLAYER IN)")
 		Game.end()
 
 
-func _on_CreateNotifier_viewport_entered(viewport):
-	print("Section: _on_CreateNotifier_viewport_entered")
-	emit_signal("appeared_on_screen")
-
-
-func _on_FreeNotifier_viewport_exited(viewport):
-	print("Section: _on_FreeNotifier_viewport_exited")
-	queue_free()
+func _on_SectionClearedArea_area_entered(area):
+	if area is PlayerArea:
+		print("Section: _on_SectionClearedArea_area_entered (PLAYER IN)")
+		emit_signal("cleared")
+		section_cleared_area.queue_free()

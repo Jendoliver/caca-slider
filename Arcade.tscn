@@ -7,4 +7,4 @@
 script = ExtResource( 1 )
 
 [node name="StartSection" parent="." instance=ExtResource( 2 )]
-[connection signal="appeared_on_screen" from="StartSection" to="." method="create_new_section"]
+[connection signal="cleared" from="StartSection" to="." method="create_new_section"]
