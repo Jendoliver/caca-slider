@@ -1,6 +1,7 @@
-extends Sprite
+extends Node2D
 
-onready var hitbox = $PlayerArea
+onready var sprite = $Sprite
+onready var hitbox = $Hitbox
 
 
 func _ready():
@@ -15,6 +16,7 @@ func _process(delta):
 
 func start_run():
 	show()
+	global_position = get_global_mouse_position()
 	hitbox.monitorable = true
 
 

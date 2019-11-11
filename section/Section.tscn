@@ -8,6 +8,11 @@ __meta__ = {
 "_edit_vertical_guides_": [ 180.0 ]
 }
 
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 360.0
+margin_bottom = 640.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="FreeNotifier" type="VisibilityNotifier2D" parent="."]
@@ -17,6 +22,6 @@ position = Vector2( 180, -20 )
 position = Vector2( 180, 620 )
 
 [node name="DeathArea" type="Area2D" parent="."]
-[connection signal="screen_exited" from="FreeNotifier" to="." method="_on_FreeNotifier_screen_exited"]
-[connection signal="screen_entered" from="CreateNotifier" to="." method="_on_CreateNotifier_screen_entered"]
+[connection signal="viewport_exited" from="FreeNotifier" to="." method="_on_FreeNotifier_viewport_exited"]
+[connection signal="viewport_entered" from="CreateNotifier" to="." method="_on_CreateNotifier_viewport_entered"]
 [connection signal="area_entered" from="DeathArea" to="." method="_on_DeathArea_area_entered"]

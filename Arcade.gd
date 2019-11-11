@@ -11,7 +11,7 @@ var sections = [
 ]
 var player
 
-onready var last_created_section: Section = $StartSection
+onready var last_section: Section = $StartSection
 
 
 func _ready():
@@ -38,9 +38,9 @@ func start_game():
 func create_new_section():
 	print("Arcade: create_new_section")
 	var new_section = sections[randi() % len(sections)].instance()
-	new_section.global_position = last_created_section.global_position
-	new_section.global_position.y -= last_created_section.height
+	new_section.global_position = last_section.global_position
+	var height_offset = new_section.height - last_section.height
+	new_section.global_position.y -= last_section.height + height_offset
 	add_child(new_section)
 	new_section.connect("appeared_on_screen", self, "create_new_section")
-	last_created_section = new_section
-	print(Nodes.repr(self, true))
+	last_section = new_section
