@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/LoseScreen.gd" type="Script" id=1]
+
+[node name="LoseScreen" type="CanvasLayer"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 180.0 ]
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.466667 )
+
+[node name="LosePhraseLabel" type="Label" parent="Background"]
+margin_left = 40.0
+margin_top = 130.0
+margin_right = 208.0
+margin_bottom = 177.0
+rect_scale = Vector2( 1.72, 1.72 )
+text = "You lose, very sad :("
+align = 1
+autowrap = true
+
+[node name="YourScore" type="Label" parent="Background"]
+margin_left = 110.0
+margin_top = 250.0
+margin_right = 213.0
+margin_bottom = 264.0
+rect_scale = Vector2( 1.24, 1.24 )
+text = "Your score:"
+align = 1
+
+[node name="ScoreLabel" type="Label" parent="Background"]
+margin_left = 10.0
+margin_top = 280.0
+margin_right = 152.0
+margin_bottom = 294.0
+rect_scale = Vector2( 2.38775, 2.38775 )
+text = "0"
+align = 1
+
+[node name="YourBestScore" type="Label" parent="Background"]
+margin_left = 110.0
+margin_top = 370.0
+margin_right = 213.0
+margin_bottom = 384.0
+rect_scale = Vector2( 1.24, 1.24 )
+text = "Your best score:"
+align = 1
+
+[node name="HiscoreLabel" type="Label" parent="Background"]
+margin_left = 10.0
+margin_top = 400.0
+margin_right = 152.0
+margin_bottom = 414.0
+rect_scale = Vector2( 2.38775, 2.38775 )
+text = "0"
+align = 1
+
+[node name="PlayAgainBtn" type="Button" parent="Background"]
+margin_left = 30.0
+margin_top = 540.0
+margin_right = 150.0
+margin_bottom = 570.0
+rect_scale = Vector2( 2.48, 2.48 )
+text = "PLAY AGAIN!"
+[connection signal="pressed" from="Background/PlayAgainBtn" to="." method="_on_PlayAgainBtn_pressed"]
