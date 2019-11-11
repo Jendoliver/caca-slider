@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://section/Section.gd" type="Script" id=1]
+
+[node name="Section" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 180.0 ]
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="SafeArea" type="Area2D" parent="."]
+
+[node name="FreeNotifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 180, -20 )
+
+[node name="CreateNotifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 180, 620 )
+[connection signal="screen_exited" from="FreeNotifier" to="." method="_on_FreeNotifier_screen_exited"]
+[connection signal="screen_entered" from="CreateNotifier" to="." method="_on_CreateNotifier_screen_entered"]
