@@ -2,7 +2,7 @@
 extends Node
 
 
-func change_parent(node: Node, new_parent: Node, keep_position = false):
+func reparent(node: Node, new_parent: Node, keep_position = false):
 	var prev_pos = node.global_position
 	node.get_parent().remove_child(node)
 	new_parent.add_child(node)
