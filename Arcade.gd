@@ -15,32 +15,35 @@ var sections = [
 ]
 var section_pool = []
 var last_section: Section
-var player
 var score = 0 setget set_score
 var hiscore
 
 onready var score_timer: Timer = $ScoreTimer
 onready var score_label: Label = $HUD/ScoreLabel
+onready var player = $Player
 
 
 func _ready():
 	Game.connect("ended", self, "end_game")
 	hiscore = load_hiscore()
-	_init()
+	initialize()
 
 
-func _init():
-	score = 0
+func initialize():
+	randomize()
 	position = Vector2(0, 0)
+	last_section = null
 	set_physics_process(false)
-	for i in range(initial_sections - 1):
+	for i in range(initial_sections):
 		create_new_section()
+	set_process_input(true)
 
 
 func restart():
 	for i in range(len(section_pool)):
 		section_pool.pop_back().queue_free()
-	_init()
+	initialize()
+	set_score(0)
 
 
 func _physics_process(delta):
@@ -48,6 +51,15 @@ func _physics_process(delta):
 
 
 func _input(event):
+#	if event is InputEventKey and event.scancode == KEY_P:
+#		print("Section pool len: ", len(section_pool))
+#
+#	if event is InputEventKey and event.scancode == KEY_D:
+#		print(Nodes.repr(self))
+#
+#	if event is InputEventKey and event.scancode == KEY_K:
+#		Game.end()
+	
 	if Game.is_started:
 		return
 
@@ -57,8 +69,6 @@ func _input(event):
 
 
 func start_game():
-	player = Player.instance()
-	add_child(player)
 	set_physics_process(true)
 	score = 0
 	score_timer.wait_time = 1
@@ -75,6 +85,7 @@ func end_game():
 	lose_screen.score = score
 	lose_screen.hiscore = hiscore
 	lose_screen.connect("play_again_pressed", self, "restart")
+	set_process_input(false)
 
 
 func create_new_section():
@@ -116,7 +127,7 @@ func save_hiscore():
 func load_hiscore() -> int:
 	var save_file = File.new()
 	if not save_file.file_exists("user://savegame.save"):
-		 return 0
+		return 0
 	
 	save_file.open("user://savegame.sav", File.READ)
 	var json_obj = parse_json(save_file.get_line())
