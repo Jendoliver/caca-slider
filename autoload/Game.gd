@@ -4,6 +4,7 @@ signal started
 signal ended
 
 var is_started = false
+var save_file = "user://savegame.sav"
 
 
 func start():

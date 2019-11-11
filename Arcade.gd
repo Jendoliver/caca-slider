@@ -119,17 +119,17 @@ func save_hiscore():
 		return
 		
 	var save_file = File.new()
-	save_file.open("user://savegame.sav", File.WRITE)
+	save_file.open(Game.save_file, File.WRITE)
 	save_file.store_line(to_json({ "arcade_hiscore" : hiscore }))
 	save_file.close()
 
 
 func load_hiscore() -> int:
 	var save_file = File.new()
-	if not save_file.file_exists("user://savegame.save"):
+	if not save_file.file_exists(Game.save_file):
 		return 0
 	
-	save_file.open("user://savegame.sav", File.READ)
+	save_file.open(Game.save_file, File.READ)
 	var json_obj = parse_json(save_file.get_line())
 	save_file.close()
 	return json_obj["arcade_hiscore"]
