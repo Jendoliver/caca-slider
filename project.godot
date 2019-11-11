@@ -31,8 +31,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Game="*res://autoload/Game.tscn"
 Nodes="*res://autoload/Nodes.gd"
+Game="*res://autoload/Game.gd"
 
 [display]
 

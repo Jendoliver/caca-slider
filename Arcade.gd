@@ -2,6 +2,7 @@ extends Node2D
 
 var Player = preload("res://player/Player.tscn")
 
+export (int) var score_per_second = 1
 export (int) var move_speed_pxs = 100
 export (int) var section_pool_capacity = 4
 
@@ -12,8 +13,11 @@ var sections = [
 ]
 var section_pool = []
 var player
+var score = 0 setget set_score
 
 onready var last_section: Section = $StartSection
+onready var score_timer: Timer = $ScoreTimer
+onready var score_label: Label = $HUD/ScoreLabel
 
 
 func _ready():
@@ -38,6 +42,9 @@ func start_game():
 	player = Player.instance()
 	add_child(player)
 	set_physics_process(true)
+	score = 0
+	score_timer.wait_time = 1
+	score_timer.start()
 	Game.start()
 
 
@@ -52,3 +59,12 @@ func create_new_section():
 	section_pool.push_front(new_section)
 	if len(section_pool) > section_pool_capacity:
 		section_pool.pop_back().queue_free()
+
+
+func set_score(new_score):
+	score = new_score
+	score_label.text = str(score)
+
+
+func _on_ScoreTimer_timeout():
+	set_score(score + score_per_second)
