@@ -1,7 +1,10 @@
 extends Sprite
 
+onready var hitbox = $PlayerArea
+
 
 func _ready():
+	end_run()
 	Game.connect("started", self, "start_run")
 	Game.connect("ended", self, "end_run")
 
@@ -12,15 +15,9 @@ func _process(delta):
 
 func start_run():
 	show()
-	toggle_collisions(true)
+	hitbox.monitorable = true
 
 
 func end_run():
 	hide()
-	toggle_collisions(false)
-
-
-func toggle_collisions(enable):
-	for child in get_children():
-		if child is PlayerArea:
-			child.monitorable = enable
+	hitbox.monitorable = false

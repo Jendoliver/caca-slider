@@ -10,12 +10,13 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 
-[node name="SafeArea" type="Area2D" parent="."]
-
 [node name="FreeNotifier" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 180, -20 )
 
 [node name="CreateNotifier" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 180, 620 )
+
+[node name="DeathArea" type="Area2D" parent="."]
 [connection signal="screen_exited" from="FreeNotifier" to="." method="_on_FreeNotifier_screen_exited"]
 [connection signal="screen_entered" from="CreateNotifier" to="." method="_on_CreateNotifier_screen_entered"]
+[connection signal="area_entered" from="DeathArea" to="." method="_on_DeathArea_area_entered"]

@@ -2,8 +2,6 @@ extends Node
 
 signal started
 signal ended
-signal paused
-signal resumed
 
 export (int) var score_per_second = 1
 
@@ -32,19 +30,7 @@ func end():
 	print("Game: end")
 	score_timer.stop()
 	emit_signal("ended")
-
-
-func pause():
-	print("Game: pause")
-	score_timer.stop()
-	emit_signal("paused")
-
-
-func resume():
-	print("Game: resume")
-	score_timer.start()
-	emit_signal("resumed")
-	
+	get_tree().quit()
 
 
 func reset_score():

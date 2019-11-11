@@ -9,14 +9,13 @@ var sections = [
 	preload("res://section/sneaky/Sneaky.tscn"),
 	preload("res://section/drifter/Drifter.tscn")
 ]
-var last_created_section: Section
 var player
+
+onready var last_created_section: Section = $StartSection
 
 
 func _ready():
-	last_created_section = $StartSection
 	set_physics_process(false)
-	print(Descriptor.repr(self, true))
 
 
 func _physics_process(delta):
@@ -26,9 +25,14 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if event.pressed:
-			player = Player.instance()
-			add_child(player)
-			set_physics_process(true)
+			start_game()
+
+
+func start_game():
+	player = Player.instance()
+	add_child(player)
+	set_physics_process(true)
+	Game.start()
 
 
 func create_new_section():
@@ -39,3 +43,4 @@ func create_new_section():
 	add_child(new_section)
 	new_section.connect("appeared_on_screen", self, "create_new_section")
 	last_created_section = new_section
+	print(Nodes.repr(self, true))
